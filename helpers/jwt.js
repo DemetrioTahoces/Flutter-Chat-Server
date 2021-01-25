@@ -15,6 +15,20 @@ const generateJWT = (uuid) => {
     });
 }
 
+const validateJWT = (token = '') => {
+
+    try {
+
+        const { uuid } = jwt.verify(token, process.env.JWT_KEY);
+        return uuid;
+
+    } catch (e) {
+
+        return null;
+    }
+}
+
 module.exports = {
     generateJWT,
+    validateJWT,
 }

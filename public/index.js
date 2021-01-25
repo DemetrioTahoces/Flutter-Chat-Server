@@ -1,9 +1,9 @@
 var socket = io();
 
 socket.on('connect', function() {
-    console.log('Conectado al sevidor');
+    console.log('Connected to server');
 });
 
 socket.on('disconnect', function() {
-    console.log('Perdimos conexion con el sevidor');
+    console.log('Disconnected from server');
 });
