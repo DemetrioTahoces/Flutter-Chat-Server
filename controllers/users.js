@@ -1,7 +1,9 @@
 const { request, response } = require("express");
 const User = require('../models/user');
 
-const getUsers = (req = request, res = response) => {
+const getUsers = async(req = request, res = response) => {
+
+
 
     const users = await User.find({
         _id: {
