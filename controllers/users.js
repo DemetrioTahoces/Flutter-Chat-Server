@@ -7,3 +7,7 @@ const getUsers = (req = request, res = response) => {
         msg: 'aaaaaaaa',
     })
 }
+
+module.exports = {
+    getUsers,
+}
