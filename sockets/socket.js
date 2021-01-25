@@ -1,19 +1,21 @@
 const { validateJWT } = require('../helpers/jwt');
 const { io } = require('../index');
+const { userConnected, userDisconnected } = require('../controllers/socket');
 
 // Mensajes de sockets
-io.on('connection', client => {
+io.on('connection', async client => {
     const token = client.handshake.headers['authorization'];
     const uuid = validateJWT(token);
 
-    console.log(token);
-    console.log(uuid);
-
+    // Verify client
     if (uuid == null) {
         return client.disconnect();
     }
 
-    client.on('disconnect', () => {
+    // Client authenticated
+    await userConnected(uuid);
 
+    client.on('disconnect', () => {
+        await userDisconnected(uuid);
     });
 });
