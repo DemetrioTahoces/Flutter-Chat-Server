@@ -1,13 +1,19 @@
 const User = require('../models/user');
 
-const userConnected = async(uuid = '') => {
+const userConnected = async(client, uuid = '') => {
 
-    changeOnline(uuid, true);
+    await changeOnline(uuid, true);
+    client.broadcast('connectedUser', {
+        uuid
+    });
 }
 
-const userDisconnected = async(uuid = '') => {
+const userDisconnected = async(client, uuid = '') => {
 
-    changeOnline(uuid, false);
+    await changeOnline(uuid, false);
+    client.broadcast('disconnectedUser', {
+        uuid
+    });
 }
 
 const changeOnline = async(uuid, online) => {

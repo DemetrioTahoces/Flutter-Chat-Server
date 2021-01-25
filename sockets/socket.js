@@ -13,9 +13,9 @@ io.on('connection', client => {
     }
 
     // Client authenticated
-    userConnected(uuid);
+    userConnected(client, uuid);
 
     client.on('disconnect', () => {
-        userDisconnected(uuid);
+        userDisconnected(client, uuid);
     });
 });
