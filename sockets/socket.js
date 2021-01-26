@@ -14,6 +14,14 @@ io.on('connection', client => {
     // Client authenticated
     userConnected(uuid);
 
+    // User into room
+    // client.id, 35324tg2435643526
+    client.join(uuid);
+
+    client.on('personal-message', (payload) => {
+        console.log(payload);
+    });
+
     client.on('disconnect', () => {
         userDisconnected(uuid);
     });
