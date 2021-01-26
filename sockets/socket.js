@@ -13,7 +13,7 @@ io.on('connection', async(client) => {
 
     // Client authenticated
     await userConnected(uuid);
-    client.broadcast('connected-user', {
+    client.broadcast.emit('connected-user', {
         uuid,
     });
 
@@ -28,7 +28,7 @@ io.on('connection', async(client) => {
 
     client.on('disconnect', async() => {
         await userDisconnected(uuid);
-        client.broadcast('disconnected-user', {
+        client.broadcast.emit('disconnected-user', {
             uuid,
         });
     });
