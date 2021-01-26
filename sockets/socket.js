@@ -26,7 +26,10 @@ io.on('connection', async(client) => {
         io.to(payload.to).emit('personal-message', payload);
     });
 
-    client.on('disconnect', () => {
-        userDisconnected(uuid);
+    client.on('disconnect', async() => {
+        await userDisconnected(uuid);
+        client.broadcast('disconnected-user', {
+            uuid,
+        });
     });
 });
