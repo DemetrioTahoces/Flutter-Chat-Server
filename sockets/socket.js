@@ -1,6 +1,6 @@
 const { validateJWT } = require('../helpers/jwt');
 const { io } = require('../index');
-const { userConnected, userDisconnected } = require('../controllers/socket');
+const { userConnected, userDisconnected, recordMessage } = require('../controllers/socket');
 
 io.on('connection', client => {
     const token = client.handshake.headers['authorization'];
@@ -14,11 +14,12 @@ io.on('connection', client => {
     // Client authenticated
     userConnected(uuid);
 
-    // User into room
+    // User into global room
     // client.id, 35324tg2435643526
     client.join(uuid);
 
     client.on('personal-message', (payload) => {
+        await recordMessage(payload);
         io.to(payload.to).emit('personal-message', payload);
     });
 
