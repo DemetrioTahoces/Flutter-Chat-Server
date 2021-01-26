@@ -19,7 +19,7 @@ const changeOnline = async(uuid, online) => {
     return user;
 }
 
-const recordMessage = async() => {
+const recordMessage = async(payload) => {
 
     try {
         const message = new Message(payload);
